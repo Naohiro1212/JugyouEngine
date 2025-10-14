@@ -1,17 +1,17 @@
 ﻿// MyFirstGame.cpp : アプリケーションのエントリ ポイントを定義します。
 //
 
-#include "framework.h"
+#include "Engine/framework.h"
 #include "MyFirstGame.h"
-#include "Direct3D.h"
+#include "Engine/Direct3D.h"
 //#include "Quad.h"
-#include "Camera.h"
+#include "Engine/Camera.h"
 //#include "Dice.h"
 //#include "Sprite.h"
-#include "Transform.h"
-#include "Fbx.h"
-#include "Input.h"
-
+#include "Engine/Transform.h"
+#include "Engine/Fbx.h"
+#include "Engine/Input.h"
+#include "Engine/RootJob.h"
 
 HWND hWnd = nullptr;
 
@@ -23,6 +23,7 @@ const wchar_t* WIN_CLASS_NAME = L"SAMPLE GAME WINDOW"; // ウィンドウ クラ
 const int WINDOW_WIDTH = 800;  //ウィンドウの幅
 const int WINDOW_HEIGHT = 600; //ウィンドウの高さ //SVGAサイズ
 
+RootJob* pRootJob = nullptr;
 
 // グローバル変数:
 HINSTANCE hInst;                                // 現在のインターフェイス
@@ -70,27 +71,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	Camera::Initialize(); // カメラの初期化
     Input::Initialize(hWnd); // 入力の初期化
 
-    
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_MYFIRSTGAME));
 
     MSG msg = {};  
 
+    pRootJob = new RootJob(nullptr);
+	pRootJob->Initialize();
 
-    //Quad* q = new Quad();
-	//Dice* dice = new Dice();
-	//Sprite* sprite = new Sprite();
-	Fbx* fbx = new Fbx();
-    fbx->Load("Oden.fbx");
 
-    //hr = q->Initialize();
-    //hr = dice->Initialize();
-   // hr = sprite->Initialize();
-    if (FAILED(hr))
-    {
-		return 0;
-    }
-    
-    
+
     // メイン メッセージ ループ:
     while(msg.message != WM_QUIT)
     {
@@ -111,48 +100,22 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         // 入力情報の更新
 		Input::Update();
 
-        //描画処理
-		//static float angle = 0.0f;
-        //XMMATRIX mat = XMMatrixRotationY(XMConvertToRadians(angle));
-		//mat *= XMMatrixTranslation(0.0f, 0.0f, 5.0f); //Z軸方向に5.0f移動
-        //q->Draw(mat);
-		//dice->Draw(mat); // ダイスの描画
-		//angle += 0.05f; //角度を更新
+        pRootJob->Update();
 
-        static Transform trans;
-        trans.position_.x = 1.0f;
+        pRootJob->DrawSub();
+
 
         if (Input::IsKey(DIK_ESCAPE))
         {
             PostQuitMessage(0);
         }
 
-        // 左クリック長押しで左回転　右クリック長押しで右回転
-        if (Input::IsMouseButton(0))
-        {
-            trans.rotate_.y -= 0.1f;
-        }
-        if (Input::IsMouseButton(1))
-        {
-            trans.rotate_.y += 0.1f;
-        }
-
-        trans.Calculation();
-
-		//XMMATRIX mat = XMMatrixIdentity();
-       // XMMATRIX Mtrs = trans.GetWorldMatrix();
-		//sprite->Draw(Mtrs);
-        fbx->Draw(trans);
-
+        // pRootJobから、すべてのオブジェクトの描画をする
 
         Direct3D::EndDraw();
     }
 
-    //q->Release();
-    //SAFE_DELETE(q);
-    //dice->Release();
-    //sprite->Release();
-	//SAFE_DELETE(dice);
+    pRootJob->Release();
     Input::Release();
     Direct3D::Release();
 

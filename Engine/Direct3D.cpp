@@ -51,7 +51,7 @@ HRESULT Direct3D::InitShader3D()
 
     // 頂点シェーダの作成（コンパイル）
     ID3DBlob* pCompileVS = nullptr;
-    D3DCompileFromFile(L"Simple3D.hlsl", nullptr, nullptr, "VS", "vs_5_0", NULL, 0, &pCompileVS, NULL);
+    D3DCompileFromFile(L"Engine/Simple3D.hlsl", nullptr, nullptr, "VS", "vs_5_0", NULL, 0, &pCompileVS, NULL);
     assert(pCompileVS != nullptr);
 
 
@@ -68,7 +68,7 @@ HRESULT Direct3D::InitShader3D()
 
     // ピクセルシェーダの作成（コンパイル）
     ID3DBlob* pCompilePS = nullptr;
-    D3DCompileFromFile(L"Simple3D.hlsl", nullptr, nullptr, "PS", "ps_5_0", NULL, 0, &pCompilePS, NULL);
+    D3DCompileFromFile(L"Engine/Simple3D.hlsl", nullptr, nullptr, "PS", "ps_5_0", NULL, 0, &pCompilePS, NULL);
     assert(pCompilePS != nullptr);
     hr = pDevice->CreatePixelShader(pCompilePS->GetBufferPointer(),
         pCompilePS->GetBufferSize(), NULL, &(shaderBundle[SHADER_3D].pPixelShader));
@@ -122,7 +122,7 @@ HRESULT Direct3D::InitShader2D()
 
     // 頂点シェーダの作成（コンパイル）
     ID3DBlob* pCompileVS = nullptr;
-    D3DCompileFromFile(L"Simple2D.hlsl", nullptr, nullptr, "VS", "vs_5_0", NULL, 0, &pCompileVS, NULL);
+    D3DCompileFromFile(L"Engine/Simple2D.hlsl", nullptr, nullptr, "VS", "vs_5_0", NULL, 0, &pCompileVS, NULL);
     assert(pCompileVS != nullptr);
 
 
@@ -139,7 +139,7 @@ HRESULT Direct3D::InitShader2D()
 
     // ピクセルシェーダの作成（コンパイル）
     ID3DBlob* pCompilePS = nullptr;
-    D3DCompileFromFile(L"Simple2D.hlsl", nullptr, nullptr, "PS", "ps_5_0", NULL, 0, &pCompilePS, NULL);
+    D3DCompileFromFile(L"Engine/Simple2D.hlsl", nullptr, nullptr, "PS", "ps_5_0", NULL, 0, &pCompilePS, NULL);
     assert(pCompilePS != nullptr);
     hr = pDevice->CreatePixelShader(pCompilePS->GetBufferPointer(), 
         pCompilePS->GetBufferSize(), NULL, &(shaderBundle[SHADER_2D].pPixelShader));
