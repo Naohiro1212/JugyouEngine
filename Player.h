@@ -1,12 +1,12 @@
 #pragma once
 #include "Engine/GameObject.h"
 
+class ChildOden;
 class Fbx;
 
 class Player :
     public GameObject
 {
-	Fbx* pFbx_;
 public:
 	Player(GameObject* parent);
 	~Player();
@@ -14,5 +14,9 @@ public:
 	void Update() override;
 	void Draw() override;
 	void Release() override;
+private:
+	Fbx* pFbx_;
+	ChildOden* pRChildOden_;
+	ChildOden* pLChildOden_;
 };
 

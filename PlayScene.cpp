@@ -1,5 +1,6 @@
 #include "PlayScene.h"
 #include "Player.h"
+#include "ChildOden.h"
 
 PlayScene::PlayScene(GameObject* parent)
 {

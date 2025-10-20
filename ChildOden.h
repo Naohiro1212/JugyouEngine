@@ -1,21 +1,19 @@
 #pragma once
 #include "Engine/GameObject.h"
 
-class Player;
-class ChildOden;
+class Fbx;
 
-class PlayScene :
-	public GameObject
+class ChildOden :
+    public GameObject
 {
 public:
-	PlayScene(GameObject* parent);
-	~PlayScene();
+	ChildOden(GameObject* parent);
+	~ChildOden();
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;
 	void Release() override;
-
 private:
-	Player* pPlayer;
-	ChildOden* pChildOden;
+	Fbx* pFbx_;
 };
+

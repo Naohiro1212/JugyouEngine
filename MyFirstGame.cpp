@@ -2,6 +2,7 @@
 //
 
 #include "Engine/framework.h"
+
 #include "MyFirstGame.h"
 #include "Engine/Direct3D.h"
 //#include "Quad.h"
@@ -14,8 +15,6 @@
 #include "Engine/RootJob.h"
 
 HWND hWnd = nullptr;
-
-
 
 #define MAX_LOADSTRING 100
 
@@ -91,6 +90,29 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             DispatchMessage(&msg);
         }
         //メッセージなし
+        static DWORD countFps = 0;
+
+        static DWORD startTime = timeGetTime();
+        DWORD nowTime = timeGetTime();
+        static DWORD lastUpdateTime = nowTime;
+
+        if (nowTime - startTime >= 1000)
+        {
+            std::string str = "FPS:" + std::to_string((nowTime - startTime))
+                + ". " + std::to_string(countFps);
+            SetWindowTextA(hWnd, str.c_str());
+            countFps = 0;
+            startTime = nowTime;
+        }
+		if ((nowTime - lastUpdateTime) < (1000 / 60))
+		{
+			continue;
+		}
+		lastUpdateTime = nowTime;
+
+		countFps++;
+
+		timeBeginPeriod(1);
 
 		//ゲームの処理
 		Camera::Update(); // カメラの更新
@@ -100,7 +122,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         // 入力情報の更新
 		Input::Update();
 
-        pRootJob->Update();
+        pRootJob->UpdateSub();
 
         pRootJob->DrawSub();
 
@@ -115,7 +137,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         Direct3D::EndDraw();
     }
 
-    pRootJob->Release();
+    pRootJob->ReleaseSub();
     Input::Release();
     Direct3D::Release();
 

@@ -19,12 +19,20 @@ public:
 	virtual void Draw() = 0;
 	virtual void Release() = 0;
 	void DrawSub();
+	void UpdateSub();
+	void ReleaseSub();
+
+	void SetPosition(XMFLOAT3 position);
+	void SetPosition(float x, float y, float z);
+	void KillMe();
+
 	template<typename T>
-	void Instantiate(GameObject* parent)
+	T* Instantiate(GameObject* parent)
 	{
 		T* obj = new T(parent);
 		obj->Initialize();
 		childList_.push_back(obj);
+		return(obj);
 	}
 
 protected:
@@ -32,4 +40,7 @@ protected:
 	Transform transform_;
 	GameObject* pParent_;
 	string	objectName_;
+
+private:
+	bool isDead_;
 };
