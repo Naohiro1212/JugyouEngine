@@ -1,4 +1,5 @@
 #include "Model.h"
+#include "Direct3D.h"
 
 namespace
 {
@@ -41,4 +42,23 @@ void Model::Draw(int hModel)
 
 void Model::Release()
 {
+	bool isReffered = false; // 参照されているか
+	for (int i = 0;i < modelList.size();i++)
+	{
+		isReffered = false;
+		for (int j = i+1; j < modelList.size(); j++)
+		{
+			if (modelList[i]->pfbx_ == modelList[j]->pfbx_)
+			{
+				isReffered = true;
+				break;
+			}
+		}
+		if (!isReffered)
+		{
+			SAFE_DELETE(modelList[i]->pfbx_);
+		}
+		SAFE_DELETE(modelList[i]);
+	}
+	modelList.clear(); // 配列を空にする（念のため）
 }

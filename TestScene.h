@@ -1,20 +1,13 @@
 #pragma once
 #include "Engine/GameObject.h"
 
-class Fbx;
-
-class ChildOden :
-    public GameObject
+class TestScene : public GameObject
 {
 public:
-	ChildOden(GameObject* parent);
-	~ChildOden();
+	TestScene(GameObject* parent);
+	~TestScene();
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;
 	void Release() override;
-private:
-	Fbx* pFbx_;
-	int hModel_; // ƒ‚ƒfƒ‹ƒnƒ“ƒhƒ‹
 };
-
