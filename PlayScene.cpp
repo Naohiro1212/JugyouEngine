@@ -1,5 +1,6 @@
 #include "PlayScene.h"
 #include "Player.h"
+#include "Enemy.h"
 #include "ChildOden.h"
 #include "Engine/Input.h"
 #include "Engine/SceneManager.h"
@@ -15,6 +16,7 @@ PlayScene::~PlayScene()
 void PlayScene::Initialize()
 {
 	Instantiate<Player>(this);
+	Instantiate<Enemy>(this);
 }
 
 void PlayScene::Update()

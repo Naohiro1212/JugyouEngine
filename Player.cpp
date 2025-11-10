@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Engine/Fbx.h"
 #include "Engine/Model.h"
+#include "Engine/SphereCollider.h"
 #include "ChildOden.h"
 
 Player::Player(GameObject* parent)
@@ -24,6 +25,8 @@ void Player::Initialize()
 
 	pRChildOden_->SetPosition(  2.0f, 1.0f, 0.0f );
 	pLChildOden_->SetPosition( -2.0f, 1.0f, 0.0f );
+	pCollider_ = new SphereCollider(3.0f);
+	AddCollider(pCollider_);
 }
 
 void Player::Update()
