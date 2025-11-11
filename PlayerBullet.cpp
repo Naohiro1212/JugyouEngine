@@ -29,9 +29,7 @@ void PlayerBullet::Update()
 		KillMe();
 	}
 
-	GameObject* pEnemy = FindObject("Enemy");
-	if (pEnemy == nullptr) return;
-	Collision(pEnemy);
+	OnCollision(FindObject("Enemy"));
 }
 
 void PlayerBullet::Draw()
@@ -46,6 +44,8 @@ void PlayerBullet::Release()
 
 void PlayerBullet::OnCollision(GameObject* pTarget)
 {
-	KillMe();
-	pTarget->KillMe();
+	if (pTarget->GetObjectName() == "Enemy")
+	{
+		KillMe();
+	}
 }

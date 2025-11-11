@@ -37,6 +37,8 @@ public:
 	void RoundRobin(GameObject* pTarget);
 	virtual void OnCollision(GameObject* pTarget) {};
 
+	string GetObjectName() { return objectName_; }
+
 	template<typename T>
 	T* Instantiate(GameObject* parent)
 	{

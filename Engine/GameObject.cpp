@@ -8,7 +8,7 @@ GameObject::GameObject()
 }
 
 GameObject::GameObject(GameObject* parent, const string& name)
-	:pParent_(parent), objectName_(name)
+	:pParent_(parent), objectName_(name), isDead_(false)
 {
 	if (pParent_)
 	{

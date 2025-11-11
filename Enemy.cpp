@@ -21,6 +21,7 @@ void Enemy::Initialize()
 
 void Enemy::Update()
 {
+	OnCollision(FindObject("PlayerBullet"));
 }
 
 void Enemy::Draw()
@@ -31,4 +32,12 @@ void Enemy::Draw()
 
 void Enemy::Release()
 {
+}
+
+void Enemy::OnCollision(GameObject* pTarget)
+{
+	if (pTarget->GetObjectName() == "PlayerBullet")
+	{
+		KillMe();
+	}
 }
