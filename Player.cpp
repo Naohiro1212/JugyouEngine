@@ -29,8 +29,8 @@ void Player::Initialize()
 
 	pRChildOden_->SetPosition(  2.0f, 1.0f, 0.0f );
 	pLChildOden_->SetPosition( -2.0f, 1.0f, 0.0f );
-	/*pCollider_ = new SphereCollider(0.5f);
-	AddCollider(pCollider_);*/
+	pCollider_ = new SphereCollider(0.5f);
+	AddCollider(pCollider_);
 
 	Camera::SetPosition({
 		transform_.position_.x, 
@@ -40,11 +40,19 @@ void Player::Initialize()
 
 void Player::Update()
 {
+	if (Input::IsKey(DIK_A))
+	{
+		transform_.position_.x -= 0.1f;
+	}
+	if (Input::IsKey(DIK_D))
+	{
+		transform_.position_.x += 0.1f;
+	}
 	if(Input::IsMouseButtonDown(0))
 	{
 		XMFLOAT3 pos = transform_.position_;
 		pos.y += 1.0f;
-		Instantiate<PlayerBullet>(this->pParent_)->SetPosition(pos);
+		Instantiate<PlayerBullet>(pParent_)->SetPosition(pos);
 	}
 }
 

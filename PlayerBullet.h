@@ -2,6 +2,7 @@
 #include "Engine/GameObject.h"
 
 class SphereCollider;
+class PlayScene;
 
 class PlayerBullet : public GameObject
 {
@@ -16,6 +17,5 @@ public:
 	void OnCollision(GameObject* pTarget) override;
 private:
 	int bulletModel_;
-	SphereCollider* pCollider_;
 	float speed_;
 };

@@ -142,8 +142,6 @@ void GameObject::Collision(GameObject* pTarget)
 	if (dist <= thre)
 	{
 		OnCollision(pTarget);
-		// Õ“Ëˆ—
-	//	MessageBoxA(NULL, "Collision Detected!", "Collision", MB_OK);
 	}
 }
 

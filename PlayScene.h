@@ -1,7 +1,9 @@
 #pragma once
 #include "Engine/GameObject.h"
+#include <vector>
 
 class Player;
+class PlayerBullet;
 class Enemy;
 class ChildOden;
 
@@ -15,9 +17,10 @@ public:
 	void Update() override;
 	void Draw() override;
 	void Release() override;
-
 private:
 	Player* pPlayer;
-	Enemy* pEnemy;
+	std::vector<Enemy*> enemies;
+	std::vector<PlayerBullet*> bullets;
+	
 	ChildOden* pChildOden;
 };

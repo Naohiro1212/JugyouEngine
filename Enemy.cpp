@@ -13,15 +13,13 @@ Enemy::~Enemy()
 void Enemy::Initialize()
 {
 	enemyModel_ = Model::Load("oden.fbx");
-	transform_.position_ = { 0.0f, 0.0f, 30.0f };
 
-	SphereCollider* col = new SphereCollider(0.5f);
+	SphereCollider* col = new SphereCollider(2.5f);
 	AddCollider(col);
 }
 
 void Enemy::Update()
 {
-	OnCollision(FindObject("PlayerBullet"));
 }
 
 void Enemy::Draw()
@@ -34,10 +32,3 @@ void Enemy::Release()
 {
 }
 
-void Enemy::OnCollision(GameObject* pTarget)
-{
-	if (pTarget->GetObjectName() == "PlayerBullet")
-	{
-		KillMe();
-	}
-}

@@ -18,7 +18,6 @@ public:
 private:
 	ChildOden* pRChildOden_;
 	ChildOden* pLChildOden_;
-	SphereCollider* pCollider_;
 	int hModel_;
 };
 
