@@ -1,19 +1,15 @@
 #pragma once
 #include "Engine/GameObject.h"
 
-class SphereCollider;
 
-class Enemy : public GameObject
+class TitleScene :
+	public GameObject
 {
 public:
-	Enemy(GameObject* parent);
-	~Enemy();
+	TitleScene(GameObject* parent);
+	~TitleScene();
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;
 	void Release() override;
-
-private:
-	int enemyModel_;
-	SphereCollider* pCollider_;
 };

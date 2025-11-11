@@ -1,7 +1,6 @@
 #include "PlayScene.h"
 #include "Player.h"
 #include "Enemy.h"
-#include "ChildOden.h"
 #include "Engine/Input.h"
 #include "Engine/SceneManager.h"
 
@@ -25,7 +24,7 @@ void PlayScene::Update()
 	if (Input::IsKeyDown(DIK_SPACE))
 	{
 		SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
-		pSceneManager->ChangeScene(SCENE_ID_TEST);
+		pSceneManager->ChangeScene(SCENE_ID_CLEAR);
 	}
 }
 

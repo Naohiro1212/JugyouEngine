@@ -2,6 +2,7 @@
 #include "Engine/GameObject.h"
 
 class Player;
+class Enemy;
 class ChildOden;
 
 class PlayScene :
@@ -17,5 +18,6 @@ public:
 
 private:
 	Player* pPlayer;
+	Enemy* pEnemy;
 	ChildOden* pChildOden;
 };

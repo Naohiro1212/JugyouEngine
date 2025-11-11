@@ -3,10 +3,11 @@
 #include <list>
 #include <string>
 #include "Transform.h"
-#include "SphereCollider.h"
 
 using std::string;
 using std::list;
+
+class SphereCollider;
 
 class GameObject
 {
@@ -34,6 +35,7 @@ public:
 	void AddCollider(SphereCollider* pCollider);
 	void Collision(GameObject* pTarget);
 	void RoundRobin(GameObject* pTarget);
+	virtual void OnCollision(GameObject* pTarget) {};
 
 	template<typename T>
 	T* Instantiate(GameObject* parent)

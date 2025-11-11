@@ -3,17 +3,19 @@
 
 class SphereCollider;
 
-class Enemy : public GameObject
+class PlayerBullet : public GameObject
 {
 public:
-	Enemy(GameObject* parent);
-	~Enemy();
+	PlayerBullet(GameObject* parent);
+	~PlayerBullet();
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;
 	void Release() override;
 
+	void OnCollision(GameObject* pTarget) override;
 private:
-	int enemyModel_;
+	int bulletModel_;
 	SphereCollider* pCollider_;
+	float speed_;
 };

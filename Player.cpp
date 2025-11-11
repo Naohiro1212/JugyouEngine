@@ -2,7 +2,10 @@
 #include "Engine/Fbx.h"
 #include "Engine/Model.h"
 #include "Engine/SphereCollider.h"
+#include "PlayerBullet.h"
 #include "ChildOden.h"
+#include "Engine/Input.h"
+#include "Engine/Camera.h"
 
 Player::Player(GameObject* parent)
 	:GameObject(parent, "Player"), hModel_(-1)
@@ -20,26 +23,29 @@ void Player::Initialize()
 	hModel_ = Model::Load("oden.fbx");
 	assert(hModel_ >= 0);
 	transform_.scale_ = { 0.7f, 0.7f, 0.7f };
+	transform_.position_ = { 0.0f, 0.0f, 0.0f };
 	pRChildOden_ = (ChildOden*)Instantiate<ChildOden>(this);
 	pLChildOden_ = (ChildOden*)Instantiate<ChildOden>(this);
 
 	pRChildOden_->SetPosition(  2.0f, 1.0f, 0.0f );
 	pLChildOden_->SetPosition( -2.0f, 1.0f, 0.0f );
-	pCollider_ = new SphereCollider(3.0f);
-	AddCollider(pCollider_);
+	/*pCollider_ = new SphereCollider(0.5f);
+	AddCollider(pCollider_);*/
+
+	Camera::SetPosition({
+		transform_.position_.x, 
+		transform_.position_.y + 5.0f,
+		transform_.position_.z - 15.0f });
 }
 
 void Player::Update()
 {
-	static float x = 0.0f;
-	float tx = sin(x) * 5.0f;
-	x += 0.02f;
-	transform_.position_.x = tx;
-	transform_.rotate_.y += 1.0f;
-	/*if (transform_.rotate_.y > 720.0f)
+	if(Input::IsMouseButtonDown(0))
 	{
-		KillMe();
-	}*/
+		XMFLOAT3 pos = transform_.position_;
+		pos.y += 1.0f;
+		Instantiate<PlayerBullet>(this->pParent_)->SetPosition(pos);
+	}
 }
 
 void Player::Draw()
