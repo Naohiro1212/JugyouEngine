@@ -12,7 +12,7 @@ public:
 	void Update() override;
 	void Draw() override;
 	void Release() override;
-
+	void OnCollision(GameObject* pTarget) override;
 private:
 	int enemyModel_;
 };

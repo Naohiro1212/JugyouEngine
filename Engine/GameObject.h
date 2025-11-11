@@ -28,6 +28,7 @@ public:
 	void SetPosition(float x, float y, float z);
 	void KillMe();
 
+	list<GameObject*> GetChildList() { return childList_; }
 	GameObject* GetRootJob();
 	GameObject* FindChildObject(const string& name);
 	GameObject* FindObject(const string& name);

@@ -29,6 +29,18 @@ void PlayerBullet::Update()
 	{
 		KillMe();
 	}
+
+	PlayScene* scene = (PlayScene*)pParent_;
+	const auto& children = scene->GetChildList();
+	for (GameObject* child : children)
+	{
+		if (!child) continue;
+		// –¼‘O‚Å”»’è
+		if (child->GetObjectName() == "Enemy")
+		{
+			Collision(child);
+		}
+	}
 }
 
 void PlayerBullet::Draw()
