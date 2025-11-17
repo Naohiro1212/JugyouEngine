@@ -141,7 +141,9 @@ void GameObject::Collision(GameObject* pTarget)
 	// 2.コライダー同士が交差していたら
 	if (dist <= thre)
 	{
-		OnCollision(pTarget);
+		// お互いのOnCollisionを呼ぶ
+		this->OnCollision(pTarget);
+		pTarget->OnCollision(this);
 	}
 }
 

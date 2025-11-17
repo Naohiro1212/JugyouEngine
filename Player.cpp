@@ -48,10 +48,18 @@ void Player::Update()
 	{
 		transform_.position_.x += 0.1f;
 	}
+	if (Input::IsKey(DIK_W))
+	{
+		transform_.position_.y += 0.1f;
+	}
+	if (Input::IsKey(DIK_S))
+	{
+		transform_.position_.y -= 0.1f;
+	}
 	if(Input::IsMouseButtonDown(0))
 	{
 		XMFLOAT3 pos = transform_.position_;
-		pos.y += 1.0f;
+		pos.z += 0.5f;
 		Instantiate<PlayerBullet>(pParent_)->SetPosition(pos);
 	}
 }
