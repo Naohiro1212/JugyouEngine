@@ -27,6 +27,7 @@ public:
 	void SetPosition(XMFLOAT3 position);
 	void SetPosition(float x, float y, float z);
 	void KillMe();
+	bool IsDead() { return isDead_; }
 
 	list<GameObject*> GetChildList() { return childList_; }
 	GameObject* GetRootJob();

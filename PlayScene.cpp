@@ -28,18 +28,30 @@ void PlayScene::Initialize()
 		enemy->SetPosition(-10.0f + i * 5.0f, 0.0f, 45.0f);
 		enemies.push_back(enemy);
 	}
+	aliveEnemies = enemies;
 }
 
 void PlayScene::Update()
 {
 	GameTime::Update();
-	// スペースキーでシーン遷移
-	if (Input::IsKeyDown(DIK_SPACE))
+	for (auto it = aliveEnemies.begin(); it != aliveEnemies.end(); )
+	{
+		if ((*it)->IsDead())
+		{
+			it = aliveEnemies.erase(it); // eraseは次の要素のイテレータを返す
+		}
+		else
+		{
+			++it;
+		}
+	}
+
+	// 全ての敵を倒したらクリアシーンへ
+	if (aliveEnemies.size() == 0)
 	{
 		SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
 		pSceneManager->ChangeScene(SCENE_ID_CLEAR);
 	}
-	
 }
 
 void PlayScene::Draw()

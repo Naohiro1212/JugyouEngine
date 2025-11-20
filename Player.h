@@ -4,6 +4,7 @@
 class SphereCollider;
 class ChildOden;
 class Fbx;
+class Sprite;
 
 class Player :
     public GameObject

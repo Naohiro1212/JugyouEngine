@@ -6,6 +6,7 @@
 #include "ChildOden.h"
 #include "Engine/Input.h"
 #include "Engine/Camera.h"
+#include "Engine/Sprite.h"
 
 Player::Player(GameObject* parent)
 	:GameObject(parent, "Player"), hModel_(-1)
@@ -24,6 +25,7 @@ void Player::Initialize()
 	assert(hModel_ >= 0);
 	transform_.scale_ = { 0.7f, 0.7f, 0.7f };
 	transform_.position_ = { 0.0f, 0.0f, 0.0f };
+
 	pRChildOden_ = (ChildOden*)Instantiate<ChildOden>(this);
 	pLChildOden_ = (ChildOden*)Instantiate<ChildOden>(this);
 
@@ -59,7 +61,7 @@ void Player::Update()
 	if(Input::IsMouseButtonDown(0))
 	{
 		XMFLOAT3 pos = transform_.position_;
-		pos.z += 0.5f;
+		pos.z += 2.0f;
 		Instantiate<PlayerBullet>(pParent_)->SetPosition(pos);
 	}
 }

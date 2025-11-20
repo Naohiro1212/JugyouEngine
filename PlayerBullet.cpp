@@ -26,11 +26,12 @@ PlayerBullet::~PlayerBullet() {}
 
 void PlayerBullet::Initialize()
 {
-    bulletModel_ = Model::Load("oden.fbx");
+    bulletModel_ = Model::Load("foamBulletB.fbx");
     assert(bulletModel_ >= 0);
-    transform_.scale_ = { 0.3f, 0.3f, 0.3f };
+    transform_.scale_ = { 3.0f, 3.0f, 3.0f };
+	transform_.rotate_ = { 90.0f, 0.0f, 0.0f };
 
-    pCollider_ = new SphereCollider(0.5f);
+    pCollider_ = new SphereCollider(3.3f);
     AddCollider(pCollider_);
     elapsedTime_ = 0.0f;
     posInitialized_ = false;
@@ -50,13 +51,16 @@ void PlayerBullet::Update()
     float dt = GameTime::GetDeltaTime();
     elapsedTime_ += dt;
 
-    // 角度から成分分解（z: 前方、y: 上方向）
-    const float vz = speed_ * cosf(angle_);
-    const float vy = speed_ * sinf(angle_);
+    //// 角度から成分分解（z: 前方、y: 上方向）
+    //const float vz = speed_ * cosf(angle_);
+    //const float vy = speed_ * sinf(angle_);
 
-    // 解析解（gravity_=4.9f の場合は -gravity*t^2）
-    transform_.position_.z = z0_ + vz * elapsedTime_;
-    transform_.position_.y = y0_ + vy * elapsedTime_ - 0.5f * gravity_ * elapsedTime_ * elapsedTime_;
+    //// 解析解（gravity_=4.9f の場合は -gravity*t^2）
+    //transform_.position_.z = z0_ + vz * elapsedTime_;
+    //transform_.position_.y = y0_ + vy * elapsedTime_ - 0.5f * gravity_ * elapsedTime_ * elapsedTime_;
+
+    // まっすぐ飛ばす
+	transform_.position_.z += speed_ * dt;
 
     // 画面外に出たら消す
     if (transform_.position_.z > 1000.0f || transform_.position_.y < -100.0f)

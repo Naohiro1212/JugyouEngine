@@ -20,6 +20,7 @@ public:
 private:
 	Player* pPlayer;
 	std::vector<Enemy*> enemies;
+	std::vector<Enemy*> aliveEnemies;
 	std::vector<PlayerBullet*> bullets;
 	
 	ChildOden* pChildOden;

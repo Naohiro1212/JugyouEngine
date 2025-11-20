@@ -1,5 +1,6 @@
 #pragma once
 #include "Direct3D.h"
+#include <string>
 #include <DirectXMath.h>
 
 using namespace DirectX;
@@ -24,7 +25,8 @@ public:
 	Sprite();
 	virtual ~Sprite();
 	virtual HRESULT Initialize();
-	virtual void Draw(XMMATRIX& worldMatrix);
+	void Load(std::string fileName);
+	void Draw(XMMATRIX& worldMatrix);
 	void Release();
 protected:
 	ID3D11Buffer* pVertexBuffer_;	//頂点バッファ

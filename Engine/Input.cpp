@@ -81,7 +81,14 @@ namespace Input
 
 	XMVECTOR GetMousePosition()
 	{
-		return XMVECTOR();
+		return mouseposition;
+	}
+
+	XMFLOAT2 GetMousePosition2D()
+	{
+		XMFLOAT2 pos;
+		XMStoreFloat2(&pos, mouseposition);
+		return pos;
 	}
 
 	void SetMousePosition(int x, int y)

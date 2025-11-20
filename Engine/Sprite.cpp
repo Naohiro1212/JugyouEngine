@@ -84,11 +84,14 @@ HRESULT Sprite::Initialize()
 		MessageBox(nullptr, L"コンスタントバッファの作成に失敗しました", L"エラー", MB_OK);
 		return hr;
 	}
-
 	pTexture_ = new Texture();
-	pTexture_->Load("dice.png");
 
 	return S_OK;
+}
+
+void Sprite::Load(std::string fileName)
+{
+	pTexture_->Load(fileName);
 }
 
 void Sprite::Draw(XMMATRIX& worldMatrix)
@@ -98,7 +101,6 @@ void Sprite::Draw(XMMATRIX& worldMatrix)
 	CONSTANT_BUFFER cb;
 	//cb.matWVP = XMMatrixTranspose(worldMatrix * Camera::GetViewMatrix() * Camera::GetProjectionMatrix());
 	cb.matWorld = XMMatrixTranspose(worldMatrix);
-
 
 	D3D11_MAPPED_SUBRESOURCE pdata;
 	Direct3D::pContext->Map(pConstantBuffer_, 0, D3D11_MAP_WRITE_DISCARD, 0, &pdata);	// GPUからのデータアクセスを止める
